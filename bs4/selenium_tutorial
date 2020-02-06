@@ -1,0 +1,20 @@
+from urllib.parse import quote_plus
+from bs4 import BeautifulSoup
+from selenium import webdriver
+
+baseurl = 'https://www.amazon.com/s?k='
+plusurl = input('무엇을 검색할까요? :')
+url = baseurl + quote_plus(plusurl)
+
+driver = webdriver.Chrome('/Users/zackjslee/Desktop/pythonproject/chromedriver')
+driver.get(url)
+
+html = driver.page_source
+soup = BeautifulSoup(html)
+
+r = soup.select('.a-link-normal a-text-normal')
+for i in r:
+    print(i.a.attrs['href'])
+    print()
+
+driver.close()
