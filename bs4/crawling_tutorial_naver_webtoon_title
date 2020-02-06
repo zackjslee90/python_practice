@@ -1,0 +1,64 @@
+from bs4 import BeautifulSoup
+from pprint import pprint
+import requests
+
+html = requests.get('https://comic.naver.com/webtoon/weekday.nhn')
+soup = BeautifulSoup(html.text, 'html.parser')
+html.close()
+
+# soup.find로 했을때는 제일 첫번째꺼(월요일) 부분만 가져오지만 soup.findall로 할경우 모든요일을 가져기
+# 모든웹툰영역 추출하기
+data1_list = soup.findAll('div',{'class':'col_inner'})
+# print(data1_list)
+
+# 전체 웹툰 리스트
+week_title_list = []
+
+for data1 in data1_list:
+    # 제목 영역 추출하기
+    data2 = data1.findAll('a',{'class':'title'})
+    # pprint(data2)
+
+    title_list = []
+    for t in data2:
+        title_list.append(t.text)
+    ## 혹은 title_list = [t.text for t in data2]
+
+    # pprint(title_list)
+    # week_title_list.append(title_list)
+    week_title_list.extend(title_list)
+pprint(week_title_list)
+
+
+
+## 짧은버전 만들어보기 (월요일 리스트 가져오기)
+
+from pprint import pprint
+from bs4 import BeautifulSoup
+import requests
+
+html = requests.get('https://comic.naver.com/webtoon/weekday.nhn')
+soup = BeautifulSoup(html.text, 'html.parser')
+
+monday = soup.find('div',{'class':'col_inner'})
+
+week_list = monday.findAll('a',{'class':'title'})
+# pprint(monday)
+
+for i in week_list:
+    print(i.text)
+    
+    
+## 짧은버전 만들어보기 (일주일 리스트 가져오기)
+
+from pprint import pprint
+from bs4 import BeautifulSoup
+import requests
+
+html = requests.get('https://comic.naver.com/webtoon/weekday.nhn')
+soup = BeautifulSoup(html.text, 'html.parser')
+
+week_list = soup.findAll('a',{'class':'title'})
+
+for i in week_list:
+    print(i.text)
