@@ -1,0 +1,24 @@
+import pyautogui
+import time
+
+# pyautogui.moveTo(317, 84, 1)
+#
+# pyautogui.click(clicks=3)
+#
+# time.sleep(1)
+#
+# pyautogui.typewrite(['enter'])
+
+# pyautogui.position() <- 마우스 포지션 알아내기
+# pyautogui.moveTo(000, 000, 2) <- 마우스 위치의 좌표 000, 000까지 2초만에 가라
+# pyautogui.moveRel(0, 300, 2) <- 마우스 위치의 를 0, 300 만큼 2초동안 가라 (위치지정 아님)
+# pyautogui.click() <- 마우스 클릭
+# pyautogui.click(clicks=3) <- 마우스 클릭 3번해라
+# pyautogui.click(2, interval=2) <- 마우스 클릭 2번을 2초간격으로해라
+
+# pyautogui.click(35, 174)
+
+pyautogui.screenshot('test.png', region=(19, 154, 40, 40))
+
+test = pyautogui.locateCenterOnScreen('test.png')
+pyautogui.click(test)
