@@ -1,0 +1,49 @@
+from bs4 import BeautifulSoup
+from pprint import pprint
+import requests
+
+html = requests.get('https://www.amazon.co.uk/gp/bestsellers/electronics/340321031/ref=pd_zg_hrsr_electronics')
+soup = BeautifulSoup(html.text, 'html.parser')
+html.close()
+
+data = soup.findAll('span', {'class':'aok-inline-block zg-item'})
+
+data1 = []
+for i in data:
+    data1.extend(i.findAll('div'))
+pprint(data1)
+
+# for li in data1:
+#     img = li.find('img')
+#     img_src = img['src']
+#     print(img_src)
+
+# for li in li_list:
+#     img = li.find('img')
+#     title = img['title']
+#     img_src = img['src']
+#     print(title,img_src)
+
+
+# from bs4 import BeautifulSoup
+# from pprint import pprint
+# import requests
+#
+# html = requests.get("http://comic.naver.com/webtoon/weekday.nhn")
+# soup = BeautifulSoup(html.text, 'html.parser')
+# html.close()
+#
+# data1_list=soup.findAll('div',{'class':'col_inner'})
+# # pprint(data1_list)
+#
+# li_list = []
+# for data1 in data1_list:
+#     li_list.extend(data1.findAll('li')) #해당 부분을 찾아 li_list와 병합
+# # pprint(li_list)
+#
+# #각각 썸네일과 제목 추출하기
+# for li in li_list:
+#     img = li.find('img')
+#     title = img['title']
+#     img_src = img['src']
+#     print(title,img_src)
